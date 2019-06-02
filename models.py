@@ -73,9 +73,8 @@ class Category(Base):
     category_id = Column(Integer, primary_key=True)
     category_name = Column(String(80), nullable=False)
     user_id = Column(Integer, ForeignKey('user.user_id'), nullable=False)
-    user = relationship('User', backref=backref('categories',
-                                                cascade='all,
-                                                delete-orphan'))
+    user = relationship('User', backref=backref(
+        'categories', cascade='all, delete-orphan'))
 
     @property
     def serialize(self):
@@ -96,9 +95,8 @@ class Item(Base):
     item_price = Column(String(20))
     item_date = Column(DateTime, default=func.now())
     category_id = Column(Integer, ForeignKey('category.category_id'))
-    category = relationship('Category', backref=backref('items',
-                                                        cascade='all,
-                                                        delete-orphan'))
+    category = relationship('Category', backref=backref(
+        'items', cascade='all, delete-orphan'))
 
     @property
     def serialize(self):
